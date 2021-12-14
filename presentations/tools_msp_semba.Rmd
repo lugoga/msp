@@ -1,0 +1,268 @@
+---
+title: "Marine Spatial Planning"
+subtitle: "Decision support tools: Present Applications, Gaps and Opportunity"
+author: "Masumbuko Semba"
+date: "Nelson Mandela African Institution of Science and Technology, Arusha, Tanzania"
+
+## ioslide presentation
+output:
+  ioslides_presentation:
+    incremental: false
+    self-included: true
+    
+    
+## beamer presentation
+# output:
+#   beamer_presentation:
+#     theme: "AnnArbor"
+#     colortheme: "dolphin"
+#     fonttheme: "structurebold"
+#     latex_engine: xelatex
+#   sansfont: Calibri Light
+    
+## reavealjs    
+# output:
+#   revealjs::revealjs_presentation:
+#     theme: black
+#     highlight: pygments    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, comment = "")
+
+
+
+conflicted::conflict_prefer(name = "select", winner = "dplyr")
+conflicted::conflict_prefer(name = "filter", winner = "dplyr")
+
+require(tidyverse)
+require(sf)
+require(plotly)
+require(sf)
+require(magrittr)
+require(tmap)
+# require(raster)
+```
+
+# Marine Planning
+<!-- ## What I will cover!! -->
+
+<!-- + Introduction of MSP -->
+<!-- + Present application -->
+<!-- + Gap -->
+<!-- + Opportunity -->
+<!-- + Outlook -->
+
+
+## Background---Ocean Uses
+
+```{r}
+knitr::include_graphics("graphics/ocan uses-01.svg")
+# knitr::include_graphics("graphics/ocan uses.pdf")
+```
+
+
+## Background---Ocean Uses
+
++ Carefully planning is required to minimize conflicts and foster compatibilities among uses
++ This planning process is termed *marine spatial  planning (MSP)*, 
++ MSP foster sustainable ocean management and governance.  
+
+## Marine Spatial Planning
+
++ MSP is a public process of `analyzing` and `allocating` the `spatial` and `temporal` distribution of *human activities* in **marine areas** 
++ The prime aspect of MSP are 
+   i. to achieve ecological, economic and social.
+   i. to create and establish a more rational use of marine space and the interactions among its uses, 
+   i. to balance demands for development with the need to protect the environment, and 
+   i. to deliver social and economic outcomes in an open and planned way.
+
+## Ocean Challenges
+
+<!-- + This include Population growth, Ocean warming, Ocean Acidification -->
+<!-- + As a consequence, marine ecosystem services will be redistributed, and  -->
+<!-- + Ocean uses that rely on those services will undergo spatial and temporal change through local decrease or increase, or relocation.  -->
+<!-- + They requires flexible and adaptive ocean planning -->
+
+```{r}
+
+knitr::include_graphics("graphics/assets.svg")
+
+```
+
+
+# Current Situation
+## Current Situation
+
++ Marine scientists  face a challenge of synthesizing and communicating information from large and complex data sets. 
++ Growth in data and advance in computational, can make the process of communicating the results to decision makers in a meaningful way. 
++ The traditional approach of presenting information across a series of static slides and plots often fails to convey the richness of information available.
+
+
+## Tanzania Sensitivity Atlas
+
++ The institute of Marine Sciences developed the [Tanzania Sensitivity Atlas](https://ims.udsm.ac.tz/tansea/)
++ IMS also involved in developing the [African Marine Atlas](http://www.africanmarineatlas.org/)
+
+# GAP
+## Existing
+
++ Static
++ Difficult to update
++ 
+
+# Opportunity
+
+## Tools for interactive visualization
+
++ Interactive maps
++ Interactive plots
++ engage users and stakeholders
++ easy to update the information
++ backend serve as database
+
+
+# Tools for Effective MSP
+
+## Tools for MSP
+
++ ocean management requires the integration and analysis of large and diverse data sets
++ reproducible, and collaborative tools are needed to analyze, visualize, and update data in an efficient and cost-effective manner.
++ Overcome the inherited challenge of traditional static outputs (e.g., tables, figures, reports, maps)+
+
+## Interactive tools
+
++ Interactive plots combined with spatial tools are effective way to communicate information used to inform decision-making processes such as 
+
+   + stock assessment, 
+   + ecosystem approaches to fisheries management, 
+   + conservation planning, and 
+   + marine spatial planning.
+
+
+## Interactive Tools
+
++ Interactive tools allows
+   + The audience to interact with data and data products,
+   + users to control over type of information 
+   + Users to download, filter, and re-plot the data to their desired test
+   + Provide room to work in a more open and transparent manner.
+
+
+## R languages for MSP
+
++ R programming language has grown into a software that offers tools to build interactive tools for effective communication
++ These web apps web applications are increasingly being used to explore research interactively.
+
+# Packages
+## Interactive tools building dashboard
+
++ **Flexdashboard**---R package provides structure and containers where information will be placed
+<!-- + It uses R Markdown to render related images, figures, and texts into a dashboard-based interface. The dynamism of this dashboard is automatically transferred into display functionalities to zoom in and out, and to transfer to mobile-mode if the dashboard is visualized on mobile devices.  -->
+
+<!-- The dashboard supports a wide range of components, including R base graphics, ggplot2 (Wickham 2016), gauges, tables, and html widgets such as plotly (Sievert 2018) and leaflet (Cheng et al. 2018). It can also use shiny (Chang et al. 2018) or crosstalk (Cheng et al. 2016) to bolster interactivity. -->
+
++ **Plotly**--- This package supports the creation of interactive graphics
+<!-- . The package allows the user to create interactive web graphics from ggplot2 (Wickham 2016) graphs. It also provides a more ‘direct’ link to the core plotly.js JavaScript library using syntax inspired by the grammar of graphics. -->
+
++ **Shiny** ---
+
+
+
++ **Crosstalk**---the package enables cross-widget interactions by linking, brushing, and/or filtering across multiple views. 
+
+<!-- This means that interactions with one plot can affect changes in another plot within the flexdashboard interface. In this way, filters can be applied to two linked plots, tables or a combination of plots and tables that may be in the same or in different pages. This allows users to, for example, select/highlight one point in one plot and then be able to visualize the same point in a different plot. Crosstalk supports a wide range of htmlwidgets, such as plotly and leaflet. -->
+
+# illutrative
+
+```{r}
+
+data(land, World)
+```
+
+
+
+
+## Static Terrain
+
+```{r}
+tmap_mode(mode = "plot")
+
+tm_shape(land) +
+	tm_raster("elevation", breaks=c(-Inf, 250, 500, 1000, 1500, 2000, 2500, 3000, 4000, Inf),  
+		palette = terrain.colors(9), title="Elevation", midpoint = NA) +
+tm_shape(World, is.master=TRUE, projection = "+proj=eck4") +
+	tm_borders("grey20") +
+	tm_graticules(labels.size = .5) +
+	tm_text("name", size="AREA") +
+tm_compass(position = c(.65, .15), color.light = "grey90") +
+tm_credits("Eckert IV projection", position = c("right", "BOTTOM")) +
+tm_style("classic") +
+tm_layout(bg.color="lightblue",
+	inner.margins=c(.04,.03, .02, .01), 
+	earth.boundary = TRUE, 
+	space.color="grey90") +
+tm_legend(position = c("left", "bottom"), 
+	frame = TRUE,
+	bg.color="lightblue")
+```
+
+## Interactive Terrain
+
+```{r}
+tmap_mode(mode = "view")
+
+tm_shape(land) +
+	tm_raster("elevation", breaks=c(-Inf, 250, 500, 1000, 1500, 2000, 2500, 3000, 4000, Inf),  
+		palette = terrain.colors(9), title="Elevation", midpoint = NA) +
+tm_shape(World, is.master=TRUE, projection = "+proj=eck4") +
+	tm_borders("grey20") +
+	tm_graticules(labels.size = .5) +
+	tm_text("name", size="AREA") +
+tm_credits("Eckert IV projection", position = c("right", "BOTTOM")) +
+tm_style("classic") +
+tm_layout(bg.color="lightblue",
+	inner.margins=c(.04,.03, .02, .01), 
+	earth.boundary = TRUE, 
+	space.color="grey90") 
+```
+
+
+
+## static pop
+```{r}
+tmap_mode("plot")
+
+tm_shape(World) +
+    tm_polygons(c("HPI", "economy")) +
+    tm_facets(sync = TRUE, ncol = 1)+
+  tm_compass(position = c(0.08, 0.45), color.light = "grey90", size = 3) +
+  tm_credits("The Institute of Marine Sciences", position = c("RIGHT", "BOTTOM")) +
+  # tm_style("classic",
+  #        bg.color = "lightblue",
+  #        space.color = "grey90",
+  #        inner.margins = c(0.04, 0.04, 0.03, 0.02), 
+  #        earth.boundary = TRUE)+
+  tm_legend(position = c("left", "bottom"), 
+            frame = TRUE,
+            bg.color = "lightblue")
+```
+
+
+## Interactive pop
+
+```{r}
+tmap_mode("view")
+
+tm_shape(World) +
+    tm_polygons(c("HPI", "economy")) +
+    tm_facets(sync = TRUE, ncol = 2, drop.NA.facets = TRUE)
+```
+
+
+## Conclusion 
+
++ The marine planning efforts  should be flexible and adaptive to potential future alterations
++ Regional and national policies should incorporate change to thrive in a dynamic and uncertain future. 
++ Regular update mechanisms must be established.
+

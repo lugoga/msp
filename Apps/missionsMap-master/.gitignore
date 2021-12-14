@@ -1,0 +1,6 @@
+*~
+ftpkml/
+.Rhistory
+*.out
+*.rda
+*.rds

@@ -1,0 +1,45 @@
+# R / system
+*.Rproj.user
+*.Rproj
+*.Rhistory
+*.RData
+*.Ruserdata
+*.DS_Store
+
+# directories
+data/
+figures/
+docs/
+shared/
+static_map/
+wrk/
+tests/
+manager_maps/
+tmp/
+requests/
+etc/
+
+# sensitive
+password.rda
+src/get_sas_url.sh
+
+# latex
+*.out
+*.log
+*.synctex.gz
+*.aux
+*.docx
+
+# data files
+summary_report.pdf
+*.gps
+*.gpx
+*.xlsx
+*.xls
+*.rds
+*.rda
+*.pptx
+restart.txt
+status.txt
+error_email.txt
+.Rproj.user

@@ -1,0 +1,22 @@
+--- 
+title: "A Minimal Book Example"
+author: "John Doe"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+# Executive summary {-}
+Open, reproducible, and collaborative science requires the development of tools that can analyze, visualize, and update data. Interactive based tools have the potential to transform the way scientific results are communicated, giving the audience more control over the exploration of data inputs and outputs, thus permitting an engaged and detailed exploration of patterns otherwise obscured by traditional static approaches (e.g., figures, tables, and reports). In the DFO Science community, R (R Core Team 2019) has become one of the most popular programming languages used for statistical computing, graphics and automated generation of scientific reports. Available packages for building interactive visualizations in R (e.g., flexdashboard, shiny, and plotly) have provided the ability to move towards more open data products and reporting. These proceedings summarize a series of R Learning and Development workshops on the use of interactive tools for science advice hosted by the Fisheries and Ocean Canada (DFO) Science Sector (Maritimes Region) in Fall 2019. These workshops enabled Science staff to share and learn about the application of interactive tools and their role in supporting a more open approach for science communication and advice. It is hoped that discussions from these workshops will initiate a path-forward to extend interactive tools to other approaches at DFO. These proceedings provide an overall summary of this R Learning and Development series, describing the materials, presentations, questions, discussions, and ultimately recommendations on how to continue exploring tools to improve science communication and advice.
+
+
+
